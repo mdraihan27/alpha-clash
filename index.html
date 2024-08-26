@@ -4,8 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alpha Clash</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<script src="https://kit.fontawesome.com/38353e6842.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="">
+
+    <main id="main" class="flex mx-auto flex-col items-center min-h-screen bg-[#010313] bg-[url('images/background.png')] bg-no-repeat bg-center bg-contain">
+        
+        <section id="home" class="hidden home flex flex-col min-h-screen justify-center items-center">
+
+            <h1 id="alpha-clash-title" class="anton text-white text-[170px] ">ALPHA CLASH PRO</h1>
+
+            <p id="unleash" class="poppins text-2xl font-medium text-white">Unleash Your Keyboard Kung Fu : Press “Enter” to Play</p>
+
+            <button id="play-now-btn" class="btn w-44 h-20 bg-white  font-semibold text-2xl text-black poppins mt-12 hover:text-white" >Play Now</button>
+
+        </section>
+
+        <section id="play" class=" flex flex-col justify-center min-h-screen gap-20">
+
+            <div id="artboard" class="artboard artboard-horizontal phone-6 border-[20px] rounded-2xl border-[#252634cc] bg-[#ffffffb3] mx-auto">
+
+                <div class="flex justify-center ">
+                    <p class="bg-[#252634cc] text-xl flex px-5 py-2 rounded-b-xl text-white font-medium">
+ 
+                        Don't watch keyboard  while playing...
+        
+                    </p>
+                </div>
+                <div class="flex justify-center  pt-9">
+                    <p id="display-letter" class="text-9xl poppins font-semibold text-black mx-auto ">Y</p>
+                </div>
+
+            </div>
+            
+
+            <div id="keyb-container" class="mx-auto flex flex-col gap-1">
+                  <div class="my-1 flex w-full justify-center gap-2">
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">q</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">w</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">e</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">r</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">t</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">y</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">u</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">i</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">o</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">p</kbd>
+                  </div>
+                  <div class="my-1 flex w-full justify-center gap-2">
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">a</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">s</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">d</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">f</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">g</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">h</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">j</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">k</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">l</kbd>
+                  </div>
+                  <div class="my-1 flex w-full justify-center gap-2">
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">z</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">x</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">c</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">v</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">b</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">n</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">m</kbd>
+                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">/</kbd>
+                  </div>
+            </div>
+
+            <div id="life-and-score" class="flex justify-between">
+
+                <button id="life-btn" class="btn rounded-full flex gap-3 px-6 text-xl">Life <img src="images/heart.png" alt=""> <span>1</span></button>
+
+                <button id="score-btn" class="btn rounded-full flex gap-3 px-6 text-xl">Score <img src="images/dollar.png" alt=""> <span>0</span></button>
+
+            </div>
+            
+        </section>
+        <section id="score " class="hidden my-auto">
+             
+            <div class="flex flex-col justify-center items-center">
+                <h1 class="text-white poppins font-extrabold text-6xl">Score : <span id="score-point">1</span></h1>
+                <button id="play-again-btn" class="btn border-none w-44 h-16 bg-white  font-semibold text-2xl text-black poppins mt-4 hover:text-white" >Play Again</button>
+
+                <p class="poppins text-xl font-medium text-white mt-4">Practice will make you Pro</p>
+            </div>
+
+        </section>
+
+        
+    </main>
     
 </body>
 </html>
