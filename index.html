@@ -16,17 +16,17 @@
 
     <main id="main" class="flex mx-auto flex-col items-center min-h-screen bg-[#010313] bg-[url('images/background.png')] bg-no-repeat bg-center bg-contain">
         
-        <section id="home" class="hidden home flex flex-col min-h-screen justify-center items-center">
+        <section id="home" class="home flex flex-col min-h-screen justify-center items-center">
 
             <h1 id="alpha-clash-title" class="anton text-white text-[170px] ">ALPHA CLASH PRO</h1>
 
             <p id="unleash" class="poppins text-2xl font-medium text-white">Unleash Your Keyboard Kung Fu : Press “Enter” to Play</p>
 
-            <button id="play-now-btn" class="btn w-44 h-20 bg-white  font-semibold text-2xl text-black poppins mt-12 hover:text-white" >Play Now</button>
+            <button onclick="play1()" id="play-now-btn" class="btn w-44 h-20 bg-white border-none font-semibold text-2xl text-black poppins mt-12 hover:text-white" >Play Now</button> 
 
         </section>
 
-        <section id="play" class=" flex flex-col justify-center min-h-screen gap-20">
+        <section id="play" class="hidden flex flex-col justify-center min-h-screen gap-20">
 
             <div id="artboard" class="artboard artboard-horizontal phone-6 border-[20px] rounded-2xl border-[#252634cc] bg-[#ffffffb3] mx-auto">
 
@@ -38,45 +38,45 @@
                     </p>
                 </div>
                 <div class="flex justify-center  pt-9">
-                    <p id="display-letter" class="text-9xl poppins font-semibold text-black mx-auto ">Y</p>
+                    <p id="current-alpha" class="text-9xl poppins font-semibold text-black mx-auto "></p>
                 </div>
 
             </div>
-            
+
 
             <div id="keyb-container" class="mx-auto flex flex-col gap-1">
                   <div class="my-1 flex w-full justify-center gap-2">
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">q</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">w</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">e</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">r</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">t</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">y</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">u</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">i</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">o</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">p</kbd>
+                    <kbd id="Q" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">Q</kbd>
+                    <kbd id="W" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">W</kbd>
+                    <kbd id="E" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">E</kbd>
+                    <kbd id="R" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">R</kbd>
+                    <kbd id="T" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">T</kbd>
+                    <kbd id="Y" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">Y</kbd>
+                    <kbd id="U" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">U</kbd>
+                    <kbd id="I" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">I</kbd>
+                    <kbd id="O" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">O</kbd>
+                    <kbd id="P" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">P</kbd>
                   </div>
                   <div class="my-1 flex w-full justify-center gap-2">
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">a</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">s</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">d</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">f</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">g</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">h</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">j</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">k</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">l</kbd>
+                    <kbd id="A" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">A</kbd>
+                    <kbd id="S" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">S</kbd>
+                    <kbd id="D" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">D</kbd>
+                    <kbd id="F" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">F</kbd>
+                    <kbd id="G" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">G</kbd>
+                    <kbd id="H" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">H</kbd>
+                    <kbd id="J" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">J</kbd>
+                    <kbd id="K" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">K</kbd>
+                    <kbd id="L" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">L</kbd>
                   </div>
                   <div class="my-1 flex w-full justify-center gap-2">
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">z</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">x</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">c</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">v</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">b</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">n</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">m</kbd>
-                    <kbd class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">/</kbd>
+                    <kbd id="Z" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">Z</kbd>
+                    <kbd id="X" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">X</kbd>
+                    <kbd id="C" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">C</kbd>
+                    <kbd id="V" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">V</kbd>
+                    <kbd id="B" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">B</kbd>
+                    <kbd id="N" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">N</kbd>
+                    <kbd id="M" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">M</kbd>
+                    <kbd id="/" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">/</kbd>
                   </div>
             </div>
 
@@ -93,7 +93,7 @@
              
             <div class="flex flex-col justify-center items-center">
                 <h1 class="text-white poppins font-extrabold text-6xl">Score : <span id="score-point">1</span></h1>
-                <button id="play-again-btn" class="btn border-none w-44 h-16 bg-white  font-semibold text-2xl text-black poppins mt-4 hover:text-white" >Play Again</button>
+                <button onclick="play2()" id="play-again-btn" class="btn border-none w-44 h-16 bg-white  font-semibold text-2xl text-black poppins mt-4 hover:text-white" >Play Again</button>
 
                 <p class="poppins text-xl font-medium text-white mt-4">Practice will make you Pro</p>
             </div>
@@ -102,6 +102,8 @@
 
         
     </main>
-    
+
+<script src="scripts/utilities.js"></script>    
+<script src="scripts/alpha-clash.js"></script>
 </body>
 </html>
