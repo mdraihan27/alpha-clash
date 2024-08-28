@@ -24,6 +24,8 @@
 
             <button onclick="play1()" id="play-now-btn" class="btn w-44 h-20 bg-white border-none font-semibold text-2xl text-black poppins mt-12 hover:text-white" >Play Now</button> 
 
+            <p class="poppins text-xl text-gray-400 mx-auto text-center mt-24"><span class="text-red-600">Rules : </span>After the game starts, player must press the key displayed on the screen within 1.5 seconds.<br>The player has 5 attempts (lives). Pressing the wrong key or failing to press any key within the time limit will result in the loss of an attempt.</p>
+
         </section>
 
         <section id="play" class="hidden flex flex-col justify-center min-h-screen gap-20">
@@ -31,7 +33,7 @@
             <div id="artboard" class="artboard artboard-horizontal phone-6 border-[20px] rounded-2xl border-[#252634cc] bg-[#ffffffb3] mx-auto">
 
                 <div class="flex justify-center ">
-                    <p class="bg-[#252634cc] text-xl flex px-5 py-2 rounded-b-xl text-white font-medium">
+                    <p class="bg-[#252634cc] text-xl flex px-5 py-2 rounded-b-xl text-white font-medium ">
  
                         Don't watch keyboard  while playing...
         
@@ -82,7 +84,7 @@
 
             <div id="life-and-score" class="flex justify-between">
 
-                <button id="life-btn" class="btn rounded-full flex gap-3 px-6 text-xl">Life <img src="images/heart.png" alt=""> <span id="life-count">3</span></button>
+                <button id="life-btn" class="btn rounded-full flex gap-3 px-6 text-xl">Life <img src="images/heart.png" alt=""> <span id="life-count">5</span></button>
 
                 <button id="score-btn" class="btn rounded-full flex gap-3 px-6 text-xl">Score <img src="images/dollar.png" alt=""> <span id="score-count">0</span></button>
 
@@ -95,6 +97,8 @@
                 <p class="poppins text-3xl font-extrabold text-red-500 mt-4">Game Over</p>
 
                 <h1 class="text-white poppins font-extrabold text-6xl">Score : <span id="final-page-score">1</span></h1>
+
+                <p class="poppins text-xl font-medium text-center text-white mt-4">Press "Enter" or click below</p>
 
                 <button onclick="play2()" id="play-again-btn" class="btn border-none w-44 h-16 bg-white  font-semibold text-2xl text-black poppins mt-4 hover:text-white" >Play Again</button>
 

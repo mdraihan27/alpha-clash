@@ -1,6 +1,9 @@
 let gameRunning = false, killGame = false, keyPressed = true;
 let intervalId1, pressedKey = 'no-key' , right = true, wrongAlpha , lastAlpha, runCount = 0, lifeCount = document.getElementById('life-count'), scoreCount = document.getElementById('score-count'), lastKeyBeforeGameOver, currentAlpha = 'no-key', unIdKeyPressed = false;
 
+let lifeBtn = document.getElementById('life-btn');
+let scoreBtn = document.getElementById('score-btn');
+
 function play1(){
 
     gameRunning = true;
@@ -61,23 +64,16 @@ function genRandomAlpha (){
 
 function gameOverCheck(){
 
-    if(parseInt(lifeCount.innerText) == 0){
+    if(parseInt(lifeCount.innerText) <= 0){
         
         hideOneShowOther('play' , 'score')
         document.getElementById('final-page-score').innerText = scoreCount.innerText;
         keyColorReset();
 
-    }
-
-
-    if(parseInt(lifeCount.innerText) <= 0){
-
         gameRunning = false;
         clearInterval(intervalId1);
 
     }
-
-    
 
 }
 
@@ -91,7 +87,7 @@ function highlightKey(id){
 
 document.addEventListener('keyup' , function handleKeyPress(event){
 
-    if(parseInt(lifeCount.innerText) > 0 && gameRunning == true ){
+    if(parseInt(lifeCount.innerText) > 0 && gameRunning == true && keyPressed == false){
         
         pressedKey = event.key
         pressedKey = pressedKey.toUpperCase();
@@ -119,6 +115,13 @@ document.addEventListener('keyup' , function handleKeyPress(event){
             }
 
         }
+    }else if(gameRunning == false){
+
+        if(event.key == 'Enter' && runCount == 0){
+            play1();
+        }else if(event.key == 'Enter' && runCount > 0){
+            play2();
+        }
     }
     
 })
@@ -131,6 +134,8 @@ function correctKeyPressed(id){
         element.classList.remove('bg-[#ffa500]');
         element.classList.add('bg-green-500');
 
+        scoreBtn.classList.add('bg-green-500')
+
 }
 
 function wrongKeyPressed(id){
@@ -138,6 +143,8 @@ function wrongKeyPressed(id){
         element = document.getElementById(id);
         element.classList.remove('bg-white');
         element.classList.add('bg-red-600');
+
+        lifeBtn.classList.add('bg-red-600')
 
         
 
@@ -163,7 +170,7 @@ function decreaseLife(){
 function resetGame(){
 
     scoreCount.innerText = 0;
-    lifeCount.innerText = 3;
+    lifeCount.innerText = 5;
     runCount = 0;
     keyPressed = true;
 
@@ -172,6 +179,10 @@ function resetGame(){
 }
 
 function keyColorReset(){
+
+    lifeBtn.classList.remove('bg-red-600');
+    scoreBtn.classList.remove('bg-green-500');
+
     for(let alphabet of alphabets){
         element = document.getElementById(alphabet)
         if(element.classList.contains('bg-[#ffa500]') || element.classList.contains('bg-red-600') || element.classList.contains('bg-green-500')){
@@ -182,4 +193,5 @@ function keyColorReset(){
             element.classList.add('bg-white')
         }
     }
+
 }
