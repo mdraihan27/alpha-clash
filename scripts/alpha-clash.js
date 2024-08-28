@@ -1,4 +1,4 @@
-let gameRunning = false, killGame = false;
+let gameRunning = false, killGame = false, keyPressed = true;
 let intervalId1, pressedKey = 'no-key' , right = true, wrongAlpha , lastAlpha, runCount = 0, lifeCount = document.getElementById('life-count'), scoreCount = document.getElementById('score-count'), lastKeyBeforeGameOver, currentAlpha = 'no-key', unIdKeyPressed = false;
 
 function play1(){
@@ -33,9 +33,18 @@ const alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', '
 
 function genRandomAlpha (){
 
+    if(keyPressed == false ){
+
+        wrongKeyPressed(currentAlpha);
+        decreaseLife();
+        keyPressed = true;
+        return;
+        
+    }
+
     keyColorReset();
 
-    unIdKeyPressed = true;
+    keyPressed = false;
     runCount++;
 
     let random = Math.round(Math.random()*25);
@@ -63,18 +72,26 @@ document.addEventListener('keyup' , function handleKeyPress(event){
         pressedKey = pressedKey.toUpperCase();
         console.log(pressedKey)
 
+        keyPressed = true;
+
         if(pressedKey == document.getElementById('current-alpha').innerText){
             
             correctKeyPressed(pressedKey);
             right = true;
             increaseScore();
             
+            
         }else{
 
             wrongAlpha = pressedKey;
             right = false;
             decreaseLife();
-            wrongKeyPressed(pressedKey);
+
+            if(alphabets.includes(pressedKey)){
+                wrongKeyPressed(pressedKey);
+            }else{
+                wrongKeyPressed(currentAlpha);
+            }
 
         }
     }
@@ -83,21 +100,13 @@ document.addEventListener('keyup' , function handleKeyPress(event){
 
 function correctKeyPressed(id){
     
-    if(alphabets.includes(id)){
-
         element = document.getElementById(id);
         element.classList.remove('bg-[#ffa500]');
         element.classList.add('bg-green-500');
 
-    }else{
-        unIdKeyPressed = true;
-    }
-    
 }
 
 function wrongKeyPressed(id){
-    
-    if(alphabets.includes(id)){
 
         element = document.getElementById(id);
         element.classList.remove('bg-white');
@@ -109,9 +118,6 @@ function wrongKeyPressed(id){
             gameRunning = false;
 
         }
-    }else{
-        unIdKeyPressed = true;
-    }
 
 }
 
