@@ -1,3 +1,5 @@
+gameRunning = false;
+
 function play1(){
 
     hideOneShowOther('home' ,'play');
@@ -9,6 +11,7 @@ function play1(){
 function play2(){
 
     hideOneShowOther('score' ,'play');
+    resetGame();
     genRandomAlpha();
 
 }
@@ -21,17 +24,15 @@ function hideOneShowOther(toBeHidden, toBeShown){
 
 }
 
-let right = true, wrongAlpha , lastAlpha, runCount = 0, lifeCount = document.getElementById('life-count'), scoreCount = document.getElementById('score-count');
+let right = true, wrongAlpha , lastAlpha, runCount = 0, lifeCount = document.getElementById('life-count'), scoreCount = document.getElementById('score-count'), lastKeyBeforeGameOver, currentAlpha;
+
+const alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 function genRandomAlpha (){
 
-    const alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-
-   if(runCount > 0){
-        if(!right){
-            unHighlightLastKey(lastAlpha);
-            unHighlightRedKey(wrongAlpha);
-        }
+   if(runCount > 0 ){
+        unHighlightLastKey(currentAlpha);
+        // unHighlightRedKey(wrongAlpha);
    }
    runCount++;
 
@@ -39,6 +40,7 @@ function genRandomAlpha (){
     
     document.getElementById('current-alpha').innerText = alphabets[random];
     highlightKey(alphabets[random]);
+    currentAlpha = alphabets[random];
 
 
 }
@@ -53,42 +55,52 @@ function highlightKey(id){
 
 document.addEventListener('keyup' , function handleKeyPress(event){
 
-    let pressedKey = event.key
-    pressedKey = pressedKey.toUpperCase();
-    console.log(pressedKey)
-    if(pressedKey == document.getElementById('current-alpha').innerText){
+    if(parseInt(lifeCount.innerText) > 0){
+        
+        let pressedKey = event.key
+        pressedKey = pressedKey.toUpperCase();
+        console.log(pressedKey)
+        if(pressedKey == document.getElementById('current-alpha').innerText){
+            
+            correctKeyPressed(pressedKey);
+            right = true;
+            // lastAlpha = document.getElementById('current-alpha').innerText;
+            increaseScore();
+            
+        }else{
 
-        correctKeyPressed(pressedKey);
-        right = true;
-        lastAlpha = document.getElementById('current-alpha').innerText;
-        increaseScore();
+            wrongAlpha = pressedKey;
+            right = false;
+            decreaseLife();
+            wrongKeyPressed(pressedKey);
+            // lastAlpha = document.getElementById('current-alpha').innerText;
+            
+            
 
-    }else{
+        }
 
-        right = false;
-        wrongAlpha = pressedKey;
-        lastAlpha = document.getElementById('current-alpha').innerText;
-        wrongKeyPressed(pressedKey);
-        decreaseLife();
-
+        // console.log(lastAlpha)
     }
+    
 })
 
 function correctKeyPressed(id){
-
-    element = document.getElementById(id);
-    element.classList.remove('bg-[#ffa500]');
-    element.classList.add('bg-white');
+    
+    // element = document.getElementById(id);
+    // element.classList.remove('bg-[#ffa500]');
+    // element.classList.add('bg-white');
     genRandomAlpha();
-
+    
 }
 
 function wrongKeyPressed(id){
-
-    element = document.getElementById(id);
-    element.classList.remove('bg-white');
-    element.classList.add('bg-red-700');
-    genRandomAlpha();
+    
+    // element = document.getElementById(id);
+    // element.classList.remove('bg-white');
+    // element.classList.add('bg-red-700');
+    if(parseInt(lifeCount.innerText) > 0){
+        genRandomAlpha();
+    }
 
 }
 
@@ -117,13 +129,32 @@ function unHighlightLastKey(id){
 }
 
 function increaseScore(){
+
     let num = parseInt(scoreCount.innerText);
     num++;
     scoreCount.innerText = num;
+
 }
 
 function decreaseLife(){
+
     let num = parseInt(lifeCount.innerText);
     num--;
     lifeCount.innerText = num;
+
+    if(num == 0){
+        
+        hideOneShowOther('play' , 'score')
+        document.getElementById('final-page-score').innerText = scoreCount.innerText;
+    }
+
+}
+
+function resetGame(){
+
+    scoreCount.innerText = 0;
+    lifeCount.innerText = 3;
+    runCount = 0;
+    unHighlightLastKey(currentAlpha);
+
 }
