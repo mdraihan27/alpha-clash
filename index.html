@@ -3,115 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alpha Clash</title>
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/38353e6842.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="styles.css">
+    <title>Keyboard Clash Pro — Keyboard Reflex Game</title>
+    <meta name="description" content="Test your keyboard reflexes in Keyboard Clash Pro. Beat the clock, rack up scores, and claim the leaderboard throne.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="">
+<body>
 
-    <main id="main" class="flex mx-auto flex-col items-center min-h-screen bg-[#010313] bg-[url('images/background.png')] bg-no-repeat bg-center bg-contain">
-        
-        <section id="home" class="home flex flex-col min-h-screen justify-center items-center">
+    <!-- Animated background particles -->
+    <div class="bg-particles" id="bg-particles"></div>
 
-            <h1 id="alpha-clash-title" class="anton text-white text-[170px] ">ALPHA CLASH PRO</h1>
+    <!-- ─── HOME SCREEN ─── -->
+    <section id="home" class="screen active">
+        <div class="home-inner">
+            <div class="logo-badge">KEYBOARD REFLEX GAME</div>
+            <h1 class="game-title">KEYBOARD<br><span class="title-accent">CLASH</span></h1>
+            <p class="tagline">Unleash Your Keyboard Kung Fu</p>
 
-            <p id="unleash" class="poppins text-2xl font-medium text-white">Unleash Your Keyboard Kung Fu : Press “Enter” to Play</p>
-
-            <button onclick="play1()" id="play-now-btn" class="btn w-44 h-20 bg-white border-none font-semibold text-2xl text-black poppins mt-12 hover:text-white" >Play Now</button> 
-
-            <p class="poppins text-xl text-gray-400 mx-auto text-center mt-24"><span class="text-red-600">Rules : </span>After the game starts, player must press the key displayed on the screen within 1.5 seconds.<br>The player has 5 attempts (lives). Pressing the wrong key or failing to press any key within the time limit will result in the loss of an attempt.</p>
-
-        </section>
-
-        <section id="play" class="hidden flex flex-col justify-center min-h-screen gap-20">
-
-            <div id="artboard" class="artboard artboard-horizontal phone-6 border-[20px] rounded-2xl border-[#252634cc] bg-[#ffffffb3] mx-auto">
-
-                <div class="flex justify-center ">
-                    <p class="bg-[#252634cc] text-xl flex px-5 py-2 rounded-b-xl text-white font-medium ">
- 
-                        Try not to watch keyboard  while playing...
-        
-                    </p>
+            <div class="rules-card">
+                <div class="rules-header">
+                    <span class="rules-dot"></span>
+                    <span>How to Play</span>
                 </div>
-                <div class="flex justify-center  pt-9">
-                    <p id="current-alpha" class="text-9xl poppins font-semibold text-black mx-auto "></p>
+                <ul class="rules-list">
+                    <li>Press the letter shown on screen within <strong>1.5 seconds</strong></li>
+                    <li>Wrong key or timeout = lose a life ❤️</li>
+                    <li>You start with <strong>5 lives</strong> — survive as long as you can</li>
+                </ul>
+            </div>
+
+            <div class="home-actions">
+                <button onclick="startGame()" id="play-now-btn" class="btn-primary">
+                    <span class="btn-label">Play Now</span>
+                    <span class="btn-hint">or press Enter</span>
+                </button>
+                <button onclick="showLeaderboard()" id="leaderboard-btn" class="btn-ghost">
+                    🏆 Leaderboard
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── PLAY SCREEN ─── -->
+    <section id="play" class="screen">
+        <div class="play-layout">
+
+            <!-- Top HUD -->
+            <div class="hud">
+                <div class="hud-stat" id="hud-lives">
+                    <span class="hud-label">Lives</span>
+                    <div class="hud-hearts" id="hud-hearts">
+                        <span class="heart active">♥</span>
+                        <span class="heart active">♥</span>
+                        <span class="heart active">♥</span>
+                        <span class="heart active">♥</span>
+                        <span class="heart active">♥</span>
+                    </div>
                 </div>
-
+                <div class="hud-center">
+                    <div class="timer-ring-wrap">
+                        <svg class="timer-ring" viewBox="0 0 50 50">
+                            <circle class="timer-track" cx="25" cy="25" r="22"/>
+                            <circle class="timer-progress" id="timer-circle" cx="25" cy="25" r="22"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="hud-stat hud-stat--right" id="hud-score">
+                    <span class="hud-label">Score</span>
+                    <span class="hud-value" id="score-count">0</span>
+                </div>
             </div>
 
-
-            <div id="keyb-container" class="mx-auto flex flex-col gap-1">
-                  <div class="my-1 flex w-full justify-center gap-2">
-                    <kbd id="Q" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">Q</kbd>
-                    <kbd id="W" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">W</kbd>
-                    <kbd id="E" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">E</kbd>
-                    <kbd id="R" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">R</kbd>
-                    <kbd id="T" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">T</kbd>
-                    <kbd id="Y" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">Y</kbd>
-                    <kbd id="U" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">U</kbd>
-                    <kbd id="I" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">I</kbd>
-                    <kbd id="O" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">O</kbd>
-                    <kbd id="P" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">P</kbd>
-                  </div>
-                  <div class="my-1 flex w-full justify-center gap-2">
-                    <kbd id="A" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">A</kbd>
-                    <kbd id="S" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">S</kbd>
-                    <kbd id="D" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">D</kbd>
-                    <kbd id="F" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">F</kbd>
-                    <kbd id="G" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">G</kbd>
-                    <kbd id="H" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">H</kbd>
-                    <kbd id="J" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">J</kbd>
-                    <kbd id="K" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">K</kbd>
-                    <kbd id="L" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">L</kbd>
-                  </div>
-                  <div class="my-1 flex w-full justify-center gap-2">
-                    <kbd id="Z" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">Z</kbd>
-                    <kbd id="X" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">X</kbd>
-                    <kbd id="C" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">C</kbd>
-                    <kbd id="V" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">V</kbd>
-                    <kbd id="B" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">B</kbd>
-                    <kbd id="N" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">N</kbd>
-                    <kbd id="M" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">M</kbd>
-                    <kbd id="/" class="kbd bg-white font-medium text-xl text-black w-14 h-14 ">/</kbd>
-                  </div>
+            <!-- Letter Display -->
+            <div class="letter-stage">
+                <div class="letter-card" id="letter-card">
+                    <span id="current-alpha" class="current-letter"></span>
+                    <span class="letter-hint">press this key</span>
+                </div>
             </div>
 
-            <div id="life-and-score" class="flex justify-between">
-
-                <button id="life-btn" class="btn rounded-full flex gap-3 px-6 text-xl">Life <img src="images/heart.png" alt=""> <span id="life-count">5</span></button>
-
-                <button id="score-btn" class="btn rounded-full flex gap-3 px-6 text-xl">Score <img src="images/dollar.png" alt=""> <span id="score-count">0</span></button>
-
+            <!-- Keyboard -->
+            <div class="keyboard-wrap">
+                <div class="kb-row">
+                    <div class="kb-key" id="Q" data-key="Q">Q</div>
+                    <div class="kb-key" id="W" data-key="W">W</div>
+                    <div class="kb-key" id="E" data-key="E">E</div>
+                    <div class="kb-key" id="R" data-key="R">R</div>
+                    <div class="kb-key" id="T" data-key="T">T</div>
+                    <div class="kb-key" id="Y" data-key="Y">Y</div>
+                    <div class="kb-key" id="U" data-key="U">U</div>
+                    <div class="kb-key" id="I" data-key="I">I</div>
+                    <div class="kb-key" id="O" data-key="O">O</div>
+                    <div class="kb-key" id="P" data-key="P">P</div>
+                </div>
+                <div class="kb-row kb-row--mid">
+                    <div class="kb-key" id="A" data-key="A">A</div>
+                    <div class="kb-key" id="S" data-key="S">S</div>
+                    <div class="kb-key" id="D" data-key="D">D</div>
+                    <div class="kb-key" id="F" data-key="F">F</div>
+                    <div class="kb-key" id="G" data-key="G">G</div>
+                    <div class="kb-key" id="H" data-key="H">H</div>
+                    <div class="kb-key" id="J" data-key="J">J</div>
+                    <div class="kb-key" id="K" data-key="K">K</div>
+                    <div class="kb-key" id="L" data-key="L">L</div>
+                </div>
+                <div class="kb-row">
+                    <div class="kb-key" id="Z" data-key="Z">Z</div>
+                    <div class="kb-key" id="X" data-key="X">X</div>
+                    <div class="kb-key" id="C" data-key="C">C</div>
+                    <div class="kb-key" id="V" data-key="V">V</div>
+                    <div class="kb-key" id="B" data-key="B">B</div>
+                    <div class="kb-key" id="N" data-key="N">N</div>
+                    <div class="kb-key" id="M" data-key="M">M</div>
+                </div>
             </div>
-            
-        </section>
-        <section id="score" class="hidden my-auto">
-             
-            <div class="flex flex-col justify-center items-center">
-                <p class="poppins text-3xl font-extrabold text-red-500 mt-4">Game Over</p>
+        </div>
+    </section>
 
-                <h1 class="text-white poppins font-extrabold text-6xl">Score : <span id="final-page-score">1</span></h1>
-
-                <p class="poppins text-xl font-medium text-center text-white mt-4">Press "Enter" or click below</p>
-
-                <button onclick="play2()" id="play-again-btn" class="btn border-none w-44 h-16 bg-white  font-semibold text-2xl text-black poppins mt-4 hover:text-white" >Play Again</button>
-
-                <p class="poppins text-xl font-medium text-white mt-4">Practice will make you Pro</p>
-
+    <!-- ─── GAME OVER / SCORE SCREEN ─── -->
+    <section id="score" class="screen">
+        <div class="gameover-inner">
+            <div class="gameover-badge">GAME OVER</div>
+            <p class="gameover-sub">You ran out of lives</p>
+            <div class="final-score-display">
+                <span class="final-label">Final Score</span>
+                <span class="final-value" id="final-page-score">0</span>
             </div>
 
-        </section>
+            <!-- Name entry for leaderboard -->
+            <div class="name-entry" id="name-entry">
+                <p class="name-entry-label">Save your score to the leaderboard?</p>
+                <div class="name-input-row">
+                    <input type="text" id="player-name-input" class="name-input" placeholder="Enter your name…" maxlength="16" autocomplete="off">
+                    <button onclick="saveScore()" id="save-score-btn" class="btn-save">Save</button>
+                </div>
+                <p class="name-skip" onclick="skipSave()">Skip →</p>
+            </div>
 
-        
-    </main>
+            <div class="gameover-actions" id="gameover-actions" style="display:none;">
+                <button onclick="play2()" id="play-again-btn" class="btn-primary">
+                    <span class="btn-label">Play Again</span>
+                    <span class="btn-hint">or press Enter</span>
+                </button>
+                <button onclick="showLeaderboard()" class="btn-ghost">🏆 View Leaderboard</button>
+            </div>
+        </div>
+    </section>
 
-<script src="scripts/utilities.js"></script>    
-<script src="scripts/alpha-clash.js"></script>
+    <!-- ─── LEADERBOARD SCREEN ─── -->
+    <section id="leaderboard" class="screen">
+        <div class="lb-inner">
+            <button class="lb-back" onclick="goHome()" id="lb-back-btn">← Back</button>
+            <div class="lb-header">
+                <div class="logo-badge">HALL OF FAME</div>
+                <h2 class="lb-title">Leaderboard</h2>
+            </div>
+            <div class="lb-list" id="lb-list">
+                <!-- filled by JS -->
+            </div>
+            <button onclick="clearLeaderboard()" class="btn-danger">Clear All Scores</button>
+        </div>
+    </section>
+
+    <!-- ─── TOAST NOTIFICATION ─── -->
+    <div class="toast" id="toast"></div>
+
+    <script src="scripts/alpha-clash.js"></script>
 </body>
 </html>
